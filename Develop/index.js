@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const markdown = require('./utils/generateMarkdown.js');
 const fs = require('fs');
+const inquirer = require('inquirer');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -30,9 +31,10 @@ const questions = [
         name: 'credits',
     },
     {
-        type: 'input',
+        type: 'list',
         message: 'License: ',
         name: 'license',
+        choices: ['MIT', 'GPL', 'None'],
     }
 ];
 
@@ -42,7 +44,11 @@ function writeToFile(fileName, data) {
 }
 
 // TODO: Create a function to initialize app
-function init() {}
+async function init() {
+    let response = await inquirer.prompt(questions);
+    console.log(response);
+    console.log(markdown.generateMarkdown(response));
+}
 
 // Function call to initialize app
 init();
