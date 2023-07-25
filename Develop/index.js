@@ -35,6 +35,21 @@ const questions = [
         message: 'License: ',
         name: 'license',
         choices: ['MIT', 'GPL', 'None'],
+    },
+    {
+        type: 'input',
+        message: 'Contact Name: ',
+        name: 'name',
+    },
+    {
+        type: 'input',
+        message: 'Contact Email: ',
+        name: 'email',
+    },
+    {
+        type: 'input',
+        message: 'Github Page: ',
+        name: 'github',
     }
 ];
 
@@ -47,7 +62,35 @@ function writeToFile(fileName, data) {
 async function init() {
     let response = await inquirer.prompt(questions);
     console.log(response);
-    console.log(markdown.generateMarkdown(response));
+    let formattedResponse = [];
+    formattedResponse.push(['title', response.title]);
+    formattedResponse.push(['subtitle', 'Description']);
+    formattedResponse.push(['text', response.description]);
+    formattedResponse.push(['subtitle', 'Table of Contents']);
+    formattedResponse.push(['list', 'Installation', '#Installation']);
+    formattedResponse.push(['list', 'Usage', '#Usage']);
+    formattedResponse.push(['list', 'Credits', '#Credits']);
+    formattedResponse.push(['list', 'License', '#License']);
+    formattedResponse.push(['list', 'Contact Info', '#Contact Info']);
+    formattedResponse.push(['list', 'Github Page', '#Github Page']);
+    formattedResponse.push(['break']);
+    formattedResponse.push(['subtitle', 'Installation']);
+    formattedResponse.push(['text', response.installation]);
+    formattedResponse.push(['subtitle', 'Usage']);
+    formattedResponse.push(['text', response.usage]);
+    formattedResponse.push(['subtitle', 'Credits']);
+    formattedResponse.push(['text', response.credits]);
+    formattedResponse.push(['subtitle', 'License']);
+    formattedResponse.push(...markdown.renderLicenseSection(response.license));
+    formattedResponse.push(['subtitle', 'Contact Info']);
+    formattedResponse.push(['list', response.name]);
+    formattedResponse.push(['list', response.email]);
+    formattedResponse.push(['subtitle', 'Github Page']);
+    formattedResponse.push(['link', response.github]);
+    console.log(formattedResponse);
+    let readme = markdown.generateMarkdown(formattedResponse);
+    console.log(readme);
+    writeToFile('README.md', readme);
 }
 
 // Function call to initialize app
