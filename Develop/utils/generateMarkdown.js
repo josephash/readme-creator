@@ -1,10 +1,22 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) { }
+function renderLicenseBadge(license) {
+  if (!license) {
+    return '';
+  }
+}
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) { }
+function renderLicenseLink(license) {
+  let link = '';
+  if (license === 'MIT') {
+    link = 'https://opensource.org/licenses/MIT';
+  } else if (license === 'GPL') {
+    link = 'https://www.gnu.org/licenses/gpl-3.0.en.html';
+  }
+  return link;
+}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
@@ -29,11 +41,32 @@ function renderLicenseSection(license) {
   }
 }
 
+function generateItem(item) {
+  if (item[0] === 'title') {
+    return `# ${item[1]}`;
+  } else if (item[0] === 'subtitle') {
+    return `## ${item[1]}`;
+  } else if (item[0] === 'text') {
+    return `${item[1]}`;
+  } else if (item[0] === 'list') {
+    return `- ${item[1]}`;
+  } else if (item[0] === 'link') {
+    return `[${item[1]}](${item[2]})`;
+  } else if (item[0] === 'image') {
+    return `![${item[1]}](${item[2]})`;
+  } else if (item[0] === 'code') {
+    return `\`\`\`${item[1]}\`\`\``;
+  }
+  return '';
+}
+
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.title}
-
-`;
+  let output = '';
+  for (i of data) {
+    output += generateItem(i) + '\n';
+  }
+  return output;
 }
 
 module.exports = { generateMarkdown };
