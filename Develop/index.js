@@ -71,12 +71,12 @@ async function init() {
     formattedResponse.push(['subtitle', 'Description']);
     formattedResponse.push(['text', response.description]);
     formattedResponse.push(['subtitle', 'Table of Contents']);
-    formattedResponse.push(['listlink', 'Installation', '#Installation']);
-    formattedResponse.push(['listlink', 'Usage', '#Usage']);
-    formattedResponse.push(['listlink', 'Credits', '#Credits']);
-    formattedResponse.push(['listlink', 'License', '#License']);
-    formattedResponse.push(['listlink', 'Contact', '#Contact']);
-    formattedResponse.push(['listlink', 'Github', '#Github']);
+    formattedResponse.push(['listlink', 'Installation', '#installation']);
+    formattedResponse.push(['listlink', 'Usage', '#usage']);
+    formattedResponse.push(['listlink', 'Credits', '#credits']);
+    formattedResponse.push(['listlink', 'License', '#license']);
+    formattedResponse.push(['listlink', 'Contact', '#contact']);
+    formattedResponse.push(['listlink', 'Github', '#github']);
     formattedResponse.push(['break']);
     formattedResponse.push(['subtitle', 'Installation']);
     formattedResponse.push(['text', response.installation]);
