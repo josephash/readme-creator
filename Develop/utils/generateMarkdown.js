@@ -53,6 +53,8 @@ function generateItem(item) {
     return `- ${item[1]}`;
   } else if (item[0] === 'link') {
     return `[${item[1]}](${item[2]})`;
+  } else if (item[0] === 'listlink') {
+    return `- [${item[1]}](${item[2]})`;
   } else if (item[0] === 'image') {
     return `![${item[1]}](${item[2]})`;
   } else if (item[0] === 'code') {
